@@ -1,0 +1,25 @@
+{
+  "github": {
+    "username": "philipluo",
+    "token": "${GITHUB_TOKEN}",
+    "base_url": "https://api.github.com"
+  },
+  "monitor": {
+    "check_interval_minutes": 30,
+    "repositories": [],
+    "track_commits": true,
+    "track_issues": true,
+    "track_pull_requests": true,
+    "track_releases": true
+  },
+  "notifications": {
+    "desktop": true,
+    "sound": true,
+    "summary_report": true,
+    "summary_time": "18:00"
+  },
+  "storage": {
+    "data_dir": "./data",
+    "log_file": "./logs/monitor.log"
+  }
+}
