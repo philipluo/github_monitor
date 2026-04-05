@@ -63,10 +63,18 @@ class GitHubMonitor:
     def _init_client(self):
         """初始化 GitHub 客户端"""
         token = self.config["github"]["token"]
+        # 支持环境变量引用 ${VAR_NAME}
+        if token.startswith("${") and token.endswith("}"):
+            env_var = token[2:-1]
+            token = os.environ.get(env_var, "")
+            if not token:
+                self.logger.error(f"环境变量 {env_var} 未设置")
+                return
+
         if token == "你的GitHub Personal Access Token":
             self.logger.error("请在 config.json 中配置你的 GitHub Token")
             return
-        
+
         base_url = self.config["github"]["base_url"]
         self.client = GitHubClient(token, base_url)
         self.logger.info("GitHub 客户端初始化成功")
